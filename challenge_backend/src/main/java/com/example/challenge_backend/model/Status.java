@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,11 +17,11 @@ public class Status {
     @Id
     @Column(name = "id_status")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_status;
+    private Integer idStatus;
 
     @Column(name = "status_name")
-    private String status_name;
+    private String statusName;
 
-    @OneToMany(mappedBy = "status")
-    private List<Subscription> subscriptionList;
+    @OneToOne(mappedBy = "statusFk")
+    private Subscription subscription;
 }

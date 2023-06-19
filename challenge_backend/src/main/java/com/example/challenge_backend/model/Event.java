@@ -1,5 +1,6 @@
 package com.example.challenge_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +20,7 @@ public class Event {
     @Id
     @Column(name = "id_event")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_event;
+    private Integer idEvent;
 
     @ManyToOne
     @JoinColumn(name = "id_sub_fk")
@@ -29,6 +30,7 @@ public class Event {
     private String type;
 
     @Column(name = "created_at")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
 }

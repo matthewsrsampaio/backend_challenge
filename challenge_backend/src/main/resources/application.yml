@@ -1,0 +1,56 @@
+
+server:
+  port: ${PORT:8081}
+  #port: ${PORT:8083}
+
+spring:
+
+  main:
+    allow-bean-definiton-overriding: true
+
+  application:
+    name: challenge-api
+
+  #Configuracao do banco de dados
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://challenge-db:5432/challenge-db
+    #url: jdbc:postgresql://localhost:5432/challenge-db
+    username: admin
+    password: 123456
+    initialize: true
+    maxActive: 3
+
+  sql:
+    init:
+      mode:
+      continue-on-error: true
+      platform: postgresql
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      format_sql: true
+    show-sql: true
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  rabbitmq:
+    host: ${RABBIT_MQ_HOST:localhost}
+    port: ${RABBIT_MQ_PORT:5672}
+    username: ${RABBIT_MQ_USER:guest}
+    password: ${RABBIT_MQ_PASSWORD:guest}
+
+app-config:
+  rabbit:
+    exchange:
+      challenge-api: challenge.topic
+
+    routingKey:
+      challenge-update: challenge-update.routingKey
+      consumer-update: consumer-update.routingKey
+
+    queue:
+      challenge-update: challenge-update.queue
+      consumer-update: consumer-update.queue

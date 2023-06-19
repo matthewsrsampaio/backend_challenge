@@ -1,0 +1,57 @@
+version: "3"
+services:
+
+  challenge-db:
+    image: postgres:11
+    container_name: challenge-db
+    restart: always
+    networks:
+      - challenge-network
+    environment:
+      - POSTGRES_DB=challenge-db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - 5432:5432
+
+  challenge_rabbit:
+    image: rabbitmq:3-management
+    container_name: challenge_rabbit
+    hostname: challenge_rabbit
+    networks:
+      - challenge-network
+    ports:
+      - 5672:5672
+      - 25676:25676
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  challenge_backend:
+    build: './challenge_backend'
+    container_name: challenge_backend
+    depends_on:
+      - challenge-db
+      - challenge_rabbit
+    networks:
+      - challenge-network
+    environment:
+      - JAVA_OPTS=${JAVA_OPTS}
+      - PORT=8081
+      - DB_PORT=5432
+      - DB_HOST=challenge-db
+      - DB_NAME=challenge-db
+      - DB_USER=admin
+      - DB_PASSWORD=123456
+      - RABBIT_MQ_HOST=challenge_rabbit
+      - RABBIT_MQ_PORT=5672
+      - RABBIT_MQ_USER=guest
+      - RABBIT_MQ_PASSWORD=guest
+    ports:
+      - 8081:8081
+
+networks:
+  challenge-network:
+    driver: bridge
+
