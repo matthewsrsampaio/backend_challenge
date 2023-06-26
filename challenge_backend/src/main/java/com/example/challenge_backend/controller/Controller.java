@@ -1,11 +1,10 @@
 package com.example.challenge_backend.controller;
 
-import com.example.challenge_backend.model.Subscription;
-import com.example.challenge_backend.response.ResponseEvents;
+import com.example.challenge_backend.response.ResponseEvent;
 import com.example.challenge_backend.response.ResponseStatus;
-import com.example.challenge_backend.response.ResponseSubscriptions;
-import com.example.challenge_backend.response.ResponseUsers;
-import com.example.challenge_backend.service.Services;
+import com.example.challenge_backend.response.ResponseSubscription;
+import com.example.challenge_backend.response.ResponseUser;
+import com.example.challenge_backend.service.ChallengeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,19 +12,19 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/subscription")
+@RequestMapping("/api")
 public class Controller {
 //
-    private final Services services;
+    private final ChallengeService challengeService;
 
-//    @PostMapping
+//    @PostMapping("subscription")
 //    public Response save(@RequestBody Request request) {
 //        return services.saveSubscription(request);
 //    }
 
     @GetMapping("all_users")
-    public List<ResponseUsers> findAllUsers() {
-        return services.findAllUsers();
+    public List<ResponseUser> findAllUsers() {
+        return challengeService.findAllUsers();
     }
 
 //    @GetMapping("all_subscriptions")
@@ -34,18 +33,22 @@ public class Controller {
 //    }
 
     @GetMapping("all_subscriptions")
-    public List<ResponseSubscriptions> findAllSubscriptions() {
-        return services.findAllSubscriptions();
+    public List<ResponseSubscription> findAllSubscriptions() {
+        return challengeService.findAllSubscriptions();
     }
 
     @GetMapping("all_status")
     public List<ResponseStatus> findAllStatus() {
-        return services.findAllStatus();
+        return challengeService.findAllStatus();
     }
 
     @GetMapping("all_events")
-    public List<ResponseEvents> findAllEvents() {
-        return services.findAllEvents();
+    public List<ResponseEvent> findAllEvents() {
+        return challengeService.findAllEvents();
     }
 
+    @GetMapping("user/{id}")
+    public ResponseUser findById(@PathVariable Integer id) {
+        return challengeService.findByIdResponse(id);
+    }
 }

@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Entity
 @Table
-public class Events {
+public class Event {
 
     @Id
     @Column(name = "id_event")

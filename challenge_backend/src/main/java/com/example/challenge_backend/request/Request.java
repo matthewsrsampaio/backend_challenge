@@ -9,5 +9,5 @@ public class Request {
     private Integer id;
     private String status;
     private String name;
-//    private LocalDateTime createdAt;
+//    private Timestamp createdAt;
 }

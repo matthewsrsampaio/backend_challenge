@@ -1,28 +1,29 @@
 package com.example.challenge_backend.service;
 
-import com.example.challenge_backend.model.Subscription;
-import com.example.challenge_backend.repository.RepositoryEvents;
+import com.example.challenge_backend.model.User;
+import com.example.challenge_backend.repository.RepositoryEvent;
 import com.example.challenge_backend.repository.RepositoryStatus;
-import com.example.challenge_backend.repository.RepositoryUsers;
-import com.example.challenge_backend.repository.RepositorySubscriptions;
-import com.example.challenge_backend.response.ResponseEvents;
+import com.example.challenge_backend.repository.RepositoryUser;
+import com.example.challenge_backend.repository.RepositorySubscription;
+import com.example.challenge_backend.response.ResponseEvent;
 import com.example.challenge_backend.response.ResponseStatus;
-import com.example.challenge_backend.response.ResponseSubscriptions;
-import com.example.challenge_backend.response.ResponseUsers;
+import com.example.challenge_backend.response.ResponseSubscription;
+import com.example.challenge_backend.response.ResponseUser;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
-public class Services {
+public class ChallengeService {
 
-    private final RepositoryUsers repositoryUsers;
-    private final RepositorySubscriptions repositorySubscriptions;
+    private final RepositoryUser repositoryUser;
+    private final RepositorySubscription repositorySubscription;
     private final RepositoryStatus repositoryStatus;
-    private final RepositoryEvents repositoryEvents;
+    private final RepositoryEvent repositoryEvent;
 
 //    public Response saveSubscription(Request request) {
 //        Subscription subscription;
@@ -31,21 +32,21 @@ public class Services {
 //        return Response.of(subscriptionModel);
 //    }
 
-    public List<ResponseUsers> findAllUsers() {
-        return repositoryUsers
+    public List<ResponseUser> findAllUsers() {
+        return repositoryUser
                 .findAll()
                 .stream()
-                .map(ResponseUsers::of)
+                .map(ResponseUser::of)
                 .collect(Collectors.toList());
     }
 
-    public List<ResponseSubscriptions> findAllSubscriptions() {
+    public List<ResponseSubscription> findAllSubscriptions() {
 //        List<Subscription> subscriptions = repositorySubscriptions.findAll();
 //        return subscriptions;
-        return repositorySubscriptions
+        return repositorySubscription
                 .findAll()
                 .stream()
-                .map(ResponseSubscriptions::of)
+                .map(ResponseSubscription::of)
                 .collect(Collectors.toList());
     }
 
@@ -57,13 +58,22 @@ public class Services {
                 .collect(Collectors.toList());
     }
 
-    public List<ResponseEvents> findAllEvents() {
-        return repositoryEvents
+    public List<ResponseEvent> findAllEvents() {
+        return repositoryEvent
                 .findAll()
                 .stream()
-                .map(ResponseEvents::of)
+                .map(ResponseEvent::of)
                 .collect(Collectors.toList());
     }
 
+    public User findById(Integer id) {
+        return repositoryUser
+                .findById(id)
+                .orElseThrow();
+    }
+
+    public ResponseUser findByIdResponse(Integer id) {
+        return ResponseUser.of(findById(id));
+    }
 
 }

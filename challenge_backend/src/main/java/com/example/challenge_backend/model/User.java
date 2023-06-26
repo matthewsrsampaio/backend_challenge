@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
-public class Users {
+@Table(name = "_user")
+public class User {
 
     @Id
     @Column(name = "id_user")
@@ -31,7 +31,7 @@ public class Users {
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
     @JsonIgnore
-    @OneToOne(mappedBy = "usersFk")
+    @OneToOne(mappedBy = "userFk")
     private Subscription subscription;
 
 }

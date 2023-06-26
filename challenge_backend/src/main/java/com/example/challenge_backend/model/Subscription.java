@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -26,7 +25,7 @@ public class Subscription {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user_fk", referencedColumnName = "id_user")
-    private Users usersFk;
+    private User userFk;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_status_fk", referencedColumnName = "id_status")
@@ -41,6 +40,6 @@ public class Subscription {
     private Timestamp updatedAt = new Timestamp(System.currentTimeMillis());
 
     @OneToMany(mappedBy = "subscriptionFk")
-    private List<Events> events;
+    private List<Event> event;
 
 }
