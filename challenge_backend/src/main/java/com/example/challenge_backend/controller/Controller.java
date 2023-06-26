@@ -1,5 +1,6 @@
 package com.example.challenge_backend.controller;
 
+import com.example.challenge_backend.request.Request;
 import com.example.challenge_backend.response.ResponseEvent;
 import com.example.challenge_backend.response.ResponseStatus;
 import com.example.challenge_backend.response.ResponseSubscription;
@@ -17,10 +18,10 @@ public class Controller {
 //
     private final ChallengeService challengeService;
 
-//    @PostMapping("subscription")
-//    public Response save(@RequestBody Request request) {
-//        return services.saveSubscription(request);
-//    }
+    @PostMapping("subscription")
+    public ResponseUser save(@RequestBody Request request) {
+        return challengeService.saveUser(request);
+    }
 
     @GetMapping("all_users")
     public List<ResponseUser> findAllUsers() {

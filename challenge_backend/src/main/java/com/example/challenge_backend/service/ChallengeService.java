@@ -5,6 +5,7 @@ import com.example.challenge_backend.repository.RepositoryEvent;
 import com.example.challenge_backend.repository.RepositoryStatus;
 import com.example.challenge_backend.repository.RepositoryUser;
 import com.example.challenge_backend.repository.RepositorySubscription;
+import com.example.challenge_backend.request.Request;
 import com.example.challenge_backend.response.ResponseEvent;
 import com.example.challenge_backend.response.ResponseStatus;
 import com.example.challenge_backend.response.ResponseSubscription;
@@ -25,12 +26,13 @@ public class ChallengeService {
     private final RepositoryStatus repositoryStatus;
     private final RepositoryEvent repositoryEvent;
 
-//    public Response saveSubscription(Request request) {
-//        Subscription subscription;
-//        subscription = Subscription.of(request);
-//        var subscriptionModel = Repository.save(subscription);
-//        return Response.of(subscriptionModel);
-//    }
+    public ResponseUser saveUser(Request request) {
+        User user;
+        user = User.of(request);
+//        user.producemessage(user);
+        var User = repositoryUser.save(user);
+        return ResponseUser.of(user);
+    }
 
     public List<ResponseUser> findAllUsers() {
         return repositoryUser
