@@ -1,6 +1,7 @@
 package com.example.challenge_backend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,12 +15,12 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Table
+public class Users {
 
     @Id
     @Column(name = "id_user")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer idUser;
 
     @Column(name = "full_name")
@@ -27,9 +28,10 @@ public class User {
 
     @Column(name = "created_at")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Timestamp createdAt;
+    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-    @OneToOne(mappedBy = "userFk")
+    @JsonIgnore
+    @OneToOne(mappedBy = "usersFk")
     private Subscription subscription;
 
 }
