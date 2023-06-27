@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class ResponseEvent implements Serializable {
     private Integer idEvent;
-    private Subscription subscriptionFk;
     private String type;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;

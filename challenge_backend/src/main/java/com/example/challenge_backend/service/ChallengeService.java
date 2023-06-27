@@ -1,11 +1,15 @@
 package com.example.challenge_backend.service;
 
+import com.example.challenge_backend.model.Event;
+import com.example.challenge_backend.model.Status;
 import com.example.challenge_backend.model.User;
 import com.example.challenge_backend.repository.RepositoryEvent;
 import com.example.challenge_backend.repository.RepositoryStatus;
 import com.example.challenge_backend.repository.RepositoryUser;
 import com.example.challenge_backend.repository.RepositorySubscription;
 import com.example.challenge_backend.request.Request;
+import com.example.challenge_backend.request.RequestEvent;
+import com.example.challenge_backend.request.RequestStatus;
 import com.example.challenge_backend.response.ResponseEvent;
 import com.example.challenge_backend.response.ResponseStatus;
 import com.example.challenge_backend.response.ResponseSubscription;
@@ -32,6 +36,22 @@ public class ChallengeService {
 //        user.producemessage(user);
         var User = repositoryUser.save(user);
         return ResponseUser.of(user);
+    }
+
+    public ResponseEvent saveEvent(RequestEvent requestEvent) {
+        Event event;
+        event = Event.of(requestEvent);
+//        event.producemessage(event);
+        var Event = repositoryEvent.save(event);
+        return ResponseEvent.of(event);
+    }
+
+    public ResponseStatus saveStatus(RequestStatus requestStatus) {
+        Status status;
+        status = Status.of(requestStatus);
+//        status.producemessage(status);
+        var Status = repositoryStatus.save(status);
+        return ResponseStatus.of(status);
     }
 
     public List<ResponseUser> findAllUsers() {
@@ -77,5 +97,4 @@ public class ChallengeService {
     public ResponseUser findByIdResponse(Integer id) {
         return ResponseUser.of(findById(id));
     }
-
 }

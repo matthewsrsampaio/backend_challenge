@@ -1,6 +1,8 @@
 package com.example.challenge_backend.controller;
 
 import com.example.challenge_backend.request.Request;
+import com.example.challenge_backend.request.RequestEvent;
+import com.example.challenge_backend.request.RequestStatus;
 import com.example.challenge_backend.response.ResponseEvent;
 import com.example.challenge_backend.response.ResponseStatus;
 import com.example.challenge_backend.response.ResponseSubscription;
@@ -18,20 +20,25 @@ public class Controller {
 //
     private final ChallengeService challengeService;
 
-    @PostMapping("subscription")
+    @PostMapping("subscriptionUser")
     public ResponseUser save(@RequestBody Request request) {
         return challengeService.saveUser(request);
+    }
+
+    @PostMapping("subscriptionEvent")
+    public ResponseEvent save(@RequestBody RequestEvent requestEvent) {
+        return challengeService.saveEvent(requestEvent);
+    }
+
+    @PostMapping("subscriptionStatus")
+    public ResponseStatus save(@RequestBody RequestStatus requestStatus) {
+        return challengeService.saveStatus(requestStatus);
     }
 
     @GetMapping("all_users")
     public List<ResponseUser> findAllUsers() {
         return challengeService.findAllUsers();
     }
-
-//    @GetMapping("all_subscriptions")
-//    public List<Subscription> findAllSubscriptions() {
-//        return services.findAllSubscriptions();
-//    }
 
     @GetMapping("all_subscriptions")
     public List<ResponseSubscription> findAllSubscriptions() {

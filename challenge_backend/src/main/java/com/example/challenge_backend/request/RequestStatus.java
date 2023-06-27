@@ -3,8 +3,7 @@ package com.example.challenge_backend.request;
 import lombok.Data;
 
 @Data
-public class Request {
+public class RequestStatus {
     private Integer id;
-    private String status;
-    private String name;
+    private String statusName;
 }

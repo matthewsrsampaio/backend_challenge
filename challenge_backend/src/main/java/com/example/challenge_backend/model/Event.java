@@ -1,5 +1,7 @@
 package com.example.challenge_backend.model;
 
+import com.example.challenge_backend.request.Request;
+import com.example.challenge_backend.request.RequestEvent;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -7,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.sql.Timestamp;
 
@@ -34,5 +37,17 @@ public class Event {
     @Column(name = "created_at")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+
+    public static Event of(RequestEvent requestEvent) {
+        var event = new Event();
+        BeanUtils.copyProperties(requestEvent, event);
+        return event
+                .builder()
+                .idEvent(requestEvent.getId())
+                .type(requestEvent.getType())
+                .subscriptionFk(requestEvent.getSubscriptionFk())
+                .createdAt(new Timestamp(System.currentTimeMillis()))
+                .build();
+    }
 
 }
