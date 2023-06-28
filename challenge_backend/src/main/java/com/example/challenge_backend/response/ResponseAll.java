@@ -15,13 +15,12 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseAll implements Serializable {
+//    private Integer id;
     private String name;
     private String status;
     private String type;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
-//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-//    private Timestamp updatedAt;
 
     public static ResponseAll of(User user, Status status, Event event) {
         var responseAll = new ResponseAll();

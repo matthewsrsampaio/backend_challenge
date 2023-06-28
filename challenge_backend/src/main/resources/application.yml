@@ -41,15 +41,28 @@ spring:
     username: ${RABBIT_MQ_USER:guest}
     password: ${RABBIT_MQ_PASSWORD:guest}
 
+#app-config:
+#  rabbit:
+#    exchange:
+#      challenge-api: challenge.topic
+#
+#    routingKey:
+#      challenge-update: challenge-update.routingKey
+#      consumer-update: consumer-update.routingKey
+#
+#    queue:
+#      challenge-update: challenge-update.queue
+#      consumer-update: consumer-update.queue
 app-config:
   rabbit:
     exchange:
-      challenge-api: challenge.topic
+      subscription-api: subscription.topic
 
     routingKey:
-      challenge-update: challenge-update.routingKey
+      subscription-update: subscription-update.routingKey
       consumer-update: consumer-update.routingKey
 
     queue:
-      challenge-update: challenge-update.queue
+      subscription-update: subscription-update.queue
       consumer-update: consumer-update.queue
+

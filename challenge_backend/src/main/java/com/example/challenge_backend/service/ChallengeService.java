@@ -4,19 +4,16 @@ import com.example.challenge_backend.model.Event;
 import com.example.challenge_backend.model.Status;
 import com.example.challenge_backend.model.Subscription;
 import com.example.challenge_backend.model.User;
+import com.example.challenge_backend.rabbitMQ.Producer;
 import com.example.challenge_backend.repository.RepositoryEvent;
 import com.example.challenge_backend.repository.RepositoryStatus;
 import com.example.challenge_backend.repository.RepositorySubscription;
 import com.example.challenge_backend.repository.RepositoryUser;
-import com.example.challenge_backend.request.Request;
 import com.example.challenge_backend.request.RequestAll;
-import com.example.challenge_backend.request.RequestEvent;
-import com.example.challenge_backend.request.RequestStatus;
 import com.example.challenge_backend.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,30 +25,31 @@ public class ChallengeService {
     private final RepositorySubscription repositorySubscription;
     private final RepositoryStatus repositoryStatus;
     private final RepositoryEvent repositoryEvent;
-
-    public ResponseUser saveUser(RequestAll requestAll) {
-        User user;
-        user = User.of(requestAll);
-//        user.producemessage(user);
-        var User = repositoryUser.save(user);
-        return ResponseUser.of(user);
-    }
-
-//    public ResponseEvent saveEvent(RequestEvent requestEvent) {
-//        Event event;
-//        event = Event.of(requestEvent);
-////        event.producemessage(event);
-//        var Event = repositoryEvent.save(event);
-//        return ResponseEvent.of(event);
+    private final Producer producer;
+//
+//    public ResponseUser saveUser(RequestAll requestAll) {
+//        User user;
+//        user = User.of(requestAll);
+////        user.producemessage(user);
+//        var User = repositoryUser.save(user);
+//        return ResponseUser.of(user);
 //    }
-
-//    public ResponseStatus saveStatus(RequestStatus requestStatus) {
-//        Status status;
-//        status = Status.of(requestStatus);
-////        status.producemessage(status);
-//        var Status = repositoryStatus.save(status);
-//        return ResponseStatus.of(status);
-//    }
+//
+////    public ResponseEvent saveEvent(RequestEvent requestEvent) {
+////        Event event;
+////        event = Event.of(requestEvent);
+//////        event.producemessage(event);
+////        var Event = repositoryEvent.save(event);
+////        return ResponseEvent.of(event);
+////    }
+//
+////    public ResponseStatus saveStatus(RequestStatus requestStatus) {
+////        Status status;
+////        status = Status.of(requestStatus);
+//////        status.producemessage(status);
+////        var Status = repositoryStatus.save(status);
+////        return ResponseStatus.of(status);
+////    }
 
     public List<ResponseUser> findAllUsers() {
         return repositoryUser
@@ -66,6 +64,14 @@ public class ChallengeService {
                 .findAll()
                 .stream()
                 .map(ResponseSubscription::of)
+                .collect(Collectors.toList());
+    }
+
+    public List<ResponseUser> findByName(String name) {
+        return repositoryUser
+                .findByNameIgnoreCaseContaining(name)
+                .stream()
+                .map(ResponseUser::of)
                 .collect(Collectors.toList());
     }
 
@@ -94,26 +100,12 @@ public class ChallengeService {
     public ResponseUser findByIdResponse(Integer id) {
         return ResponseUser.of(findById(id));
     }
-//
-//    public Status findStatusById(Integer id) {
-//        return repositoryStatus
-//                .findById(id)
-//                .orElseThrow();
-//    }
-//
-//    public ResponseStatus findStatusByIdResponse(Integer id) {
-//        return ResponseStatus.of(findStatusById(id));
-//    }
-//
+
     public Event findEventById(Integer id) {
         return repositoryEvent
                 .findById(id)
                 .orElseThrow();
     }
-//
-//    public ResponseEvent findEventByIdResponse(Integer id) {
-//        return ResponseEvent.of(findEventById(id));
-//    }
 
     public ResponseAll saveAll(RequestAll requestAll) {
         User user = new User();
@@ -133,13 +125,15 @@ public class ChallengeService {
         event.setSubscriptionFk(Subscription);
         repositoryEvent.save(event);
 
+        producer.produceMessageUser(user);
+
         return ResponseAll.of(user, status, event);
     }
 
     public ResponseAll cancelSubscription(RequestAll requestAll, Integer id) {
         return ResponseAll.of(getUser(requestAll, id),
                 getStatus(requestAll, "DEACTIVATED",id),
-                getEvent(requestAll, "CANCELLATION", id));
+                getEvent(requestAll, "CANCEL", id));
     }
 
     public ResponseAll restartSubscription(RequestAll requestAll, Integer id) {

@@ -1,9 +1,7 @@
 package com.example.challenge_backend.model;
 
-import com.example.challenge_backend.request.Request;
 import com.example.challenge_backend.request.RequestAll;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
