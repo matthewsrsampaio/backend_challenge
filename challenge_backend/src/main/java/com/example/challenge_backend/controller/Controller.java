@@ -1,11 +1,8 @@
 package com.example.challenge_backend.controller;
 
-import com.example.challenge_backend.request.Request;
 import com.example.challenge_backend.request.RequestAll;
-import com.example.challenge_backend.request.RequestEvent;
-import com.example.challenge_backend.request.RequestStatus;
-import com.example.challenge_backend.response.*;
 import com.example.challenge_backend.response.ResponseStatus;
+import com.example.challenge_backend.response.*;
 import com.example.challenge_backend.service.ChallengeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

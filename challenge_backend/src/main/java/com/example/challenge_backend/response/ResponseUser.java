@@ -14,7 +14,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseUser implements Serializable {
-
     private Integer idUser;
     private String name;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -1,8 +1,7 @@
 package com.example.challenge_backend.rabbitMQ;
 
-import com.example.challenge_backend.model.User;
-import com.example.challenge_backend.request.RequestAll;
-import com.example.challenge_backend.response.ResponseAll;
+import com.example.challenge_backend.response.ResponseEvent;
+import com.example.challenge_backend.response.ResponseStatus;
 import com.example.challenge_backend.response.ResponseUser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,9 +18,21 @@ public class Consumer {
     private final ObjectMapper objectMapper;
 
     @RabbitListener(queues = "${app-config.rabbit.queue.subscription-update}")
-    public void receiveSubscriptionMessage(ResponseUser responseAll) throws JsonProcessingException {
-        this.objectMapper.writeValueAsString(responseAll);
-        log.info("Message received: {}", this.objectMapper.writeValueAsString(responseAll));
+    public void receiveUserMessage(ResponseUser responseUser) throws JsonProcessingException {
+        this.objectMapper.writeValueAsString(responseUser);
+        log.info("Message received: {}", this.objectMapper.writeValueAsString(responseUser));
+    }
+
+    @RabbitListener(queues = "${app-config.rabbit.queue.subscription-update}")
+    public void receiveStatusMessage(ResponseStatus responseStatus) throws JsonProcessingException {
+        this.objectMapper.writeValueAsString(responseStatus);
+        log.info("Message received: {}", this.objectMapper.writeValueAsString(responseStatus));
+    }
+
+    @RabbitListener(queues = "${app-config.rabbit.queue.subscription-update}")
+    public void receiveEventMessage(ResponseEvent responseEvent) throws JsonProcessingException {
+        this.objectMapper.writeValueAsString(responseEvent);
+        log.info("Message received: {}", this.objectMapper.writeValueAsString(responseEvent));
     }
 
 }

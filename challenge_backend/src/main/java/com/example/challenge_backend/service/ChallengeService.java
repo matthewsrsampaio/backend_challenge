@@ -26,30 +26,6 @@ public class ChallengeService {
     private final RepositoryStatus repositoryStatus;
     private final RepositoryEvent repositoryEvent;
     private final Producer producer;
-//
-//    public ResponseUser saveUser(RequestAll requestAll) {
-//        User user;
-//        user = User.of(requestAll);
-////        user.producemessage(user);
-//        var User = repositoryUser.save(user);
-//        return ResponseUser.of(user);
-//    }
-//
-////    public ResponseEvent saveEvent(RequestEvent requestEvent) {
-////        Event event;
-////        event = Event.of(requestEvent);
-//////        event.producemessage(event);
-////        var Event = repositoryEvent.save(event);
-////        return ResponseEvent.of(event);
-////    }
-//
-////    public ResponseStatus saveStatus(RequestStatus requestStatus) {
-////        Status status;
-////        status = Status.of(requestStatus);
-//////        status.producemessage(status);
-////        var Status = repositoryStatus.save(status);
-////        return ResponseStatus.of(status);
-////    }
 
     public List<ResponseUser> findAllUsers() {
         return repositoryUser
@@ -109,6 +85,7 @@ public class ChallengeService {
 
     public ResponseAll saveAll(RequestAll requestAll) {
         User user = new User();
+        user.setIdUser(requestAll.getId());
         user.setName(requestAll.getName());
         var User = repositoryUser.save(user);
         Status status = new Status();
@@ -125,18 +102,21 @@ public class ChallengeService {
         event.setSubscriptionFk(Subscription);
         repositoryEvent.save(event);
 
-        producer.produceMessageUser(user);
+        producer.produceUserMessage(user);
 
         return ResponseAll.of(user, status, event);
     }
 
     public ResponseAll cancelSubscription(RequestAll requestAll, Integer id) {
+        producer.produceStatusMessage(getStatus(requestAll, "DEACTIVATED",id));
+        producer.produceEventMessage(getEvent(requestAll, "CANCEL", id));
         return ResponseAll.of(getUser(requestAll, id),
                 getStatus(requestAll, "DEACTIVATED",id),
                 getEvent(requestAll, "CANCEL", id));
     }
 
     public ResponseAll restartSubscription(RequestAll requestAll, Integer id) {
+        producer.produceUserMessage(getUser(requestAll, id));
         return ResponseAll.of(getUser(requestAll, id),
                 getStatus(requestAll, "ACTIVATED",id),
                 getEvent(requestAll, "RESTART", id));

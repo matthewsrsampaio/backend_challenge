@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseAll implements Serializable {
-//    private Integer id;
     private String name;
     private String status;
     private String type;

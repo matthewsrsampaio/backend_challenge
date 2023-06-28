@@ -1,7 +1,6 @@
 package com.example.challenge_backend.response;
 
 import com.example.challenge_backend.model.Event;
-import com.example.challenge_backend.model.Subscription;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
