@@ -25,8 +25,8 @@ public class Controller {
     }
 
     @PostMapping("subscriptionUser")
-    public ResponseUser saveUser(@RequestBody Request request) {
-        return challengeService.saveUser(request);
+    public ResponseUser saveUser(@RequestBody RequestAll requestAll) {
+        return challengeService.saveUser(requestAll);
     }
 
 //    @PostMapping("subscriptionEvent")
@@ -67,5 +67,10 @@ public class Controller {
     @PutMapping("subscription/cancel/{id}")
     public ResponseAll cancel(@RequestBody RequestAll requestAll, @PathVariable Integer id) {
         return challengeService.cancelSubscription(requestAll, id);
+    }
+
+    @PutMapping("subscription/restart/{id}")
+    public ResponseAll restart(@RequestBody RequestAll requestAll, @PathVariable Integer id) {
+        return challengeService.restartSubscription(requestAll, id);
     }
 }

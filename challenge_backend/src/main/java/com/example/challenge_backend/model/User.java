@@ -1,6 +1,7 @@
 package com.example.challenge_backend.model;
 
 import com.example.challenge_backend.request.Request;
+import com.example.challenge_backend.request.RequestAll;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -33,17 +34,13 @@ public class User {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-//    @JsonIgnore
-//    @OneToOne(mappedBy = "userFk")
-//    private Subscription subscription;
-
-    public static User of(Request request) {
+    public static User of(RequestAll requestAll) {
         var user = new User();
-        BeanUtils.copyProperties(request, user);
+        BeanUtils.copyProperties(requestAll, user);
         return user
                 .builder()
-                .idUser(request.getId())
-                .name(request.getName())
+                .idUser(requestAll.getId())
+                .name(requestAll.getName())
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();
     }
