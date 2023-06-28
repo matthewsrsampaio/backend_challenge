@@ -16,6 +16,7 @@ import com.example.challenge_backend.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class ChallengeService {
         var User = repositoryUser.save(user);
 
         Status status = new Status();
-        status.setStatusName(requestAll.getStatusName());
+        status.setStatus(requestAll.getStatus());
         var Status = repositoryStatus.save(status);
 
         Subscription subscription = new Subscription();
@@ -58,21 +59,21 @@ public class ChallengeService {
         return ResponseUser.of(user);
     }
 
-    public ResponseEvent saveEvent(RequestEvent requestEvent) {
-        Event event;
-        event = Event.of(requestEvent);
-//        event.producemessage(event);
-        var Event = repositoryEvent.save(event);
-        return ResponseEvent.of(event);
-    }
+//    public ResponseEvent saveEvent(RequestEvent requestEvent) {
+//        Event event;
+//        event = Event.of(requestEvent);
+////        event.producemessage(event);
+//        var Event = repositoryEvent.save(event);
+//        return ResponseEvent.of(event);
+//    }
 
-    public ResponseStatus saveStatus(RequestStatus requestStatus) {
-        Status status;
-        status = Status.of(requestStatus);
-//        status.producemessage(status);
-        var Status = repositoryStatus.save(status);
-        return ResponseStatus.of(status);
-    }
+//    public ResponseStatus saveStatus(RequestStatus requestStatus) {
+//        Status status;
+//        status = Status.of(requestStatus);
+////        status.producemessage(status);
+//        var Status = repositoryStatus.save(status);
+//        return ResponseStatus.of(status);
+//    }
 
     public List<ResponseUser> findAllUsers() {
         return repositoryUser
@@ -83,8 +84,6 @@ public class ChallengeService {
     }
 
     public List<ResponseSubscription> findAllSubscriptions() {
-//        List<Subscription> subscriptions = repositorySubscriptions.findAll();
-//        return subscriptions;
         return repositorySubscription
                 .findAll()
                 .stream()
@@ -117,4 +116,53 @@ public class ChallengeService {
     public ResponseUser findByIdResponse(Integer id) {
         return ResponseUser.of(findById(id));
     }
+
+    public Status findStatusById(Integer id) {
+        return repositoryStatus
+                .findById(id)
+                .orElseThrow();
+    }
+
+    public ResponseStatus findStatusByIdResponse(Integer id) {
+        return ResponseStatus.of(findStatusById(id));
+    }
+
+    public Event findEventById(Integer id) {
+        return repositoryEvent
+                .findById(id)
+                .orElseThrow();
+    }
+
+    public ResponseEvent findEventByIdResponse(Integer id) {
+        return ResponseEvent.of(findEventById(id));
+    }
+
+    public ResponseAll cancelSubscription(RequestAll requestAll, Integer id) {
+        User user = new User();
+        user.setIdUser(id);
+        user.setName(findById(id).getName());
+
+        Status status = new Status();
+        status = Status.of(requestAll);
+        status.setIdStatus(id);
+        status.setStatus("DEACTIVATED");
+        repositoryStatus.save(status);
+
+        Subscription subscription = new Subscription();
+        subscription.setIdSubscription(id);
+        subscription.setStatusFk(status);
+        subscription.setUserFk(user);
+        var Subscription = repositorySubscription.save(subscription);
+
+        Event event = new Event();
+        event = Event.of(requestAll);
+        event.setIdEvent(id);
+        event.setType("CANCELLED");
+        event.setSubscriptionFk(Subscription);
+        event.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        repositoryEvent.save(event);
+
+        return ResponseAll.of(user, status, event);
+    }
+
 }

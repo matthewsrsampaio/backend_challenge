@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class ResponseAll implements Serializable {
     private String name;
-    private String statusName;
+    private String status;
     private String type;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
@@ -26,7 +26,7 @@ public class ResponseAll implements Serializable {
     public static ResponseAll of(User user, Status status, Event event) {
         var responseAll = new ResponseAll();
         responseAll.setName(user.getName());
-        responseAll.setStatusName(status.getStatusName());
+        responseAll.setStatus(status.getStatus());
         responseAll.setType(event.getType());
         responseAll.setCreatedAt(user.getCreatedAt());
         return responseAll;

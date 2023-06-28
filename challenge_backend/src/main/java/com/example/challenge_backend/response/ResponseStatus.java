@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ResponseStatus implements Serializable {
     private Integer idStatus;
-    private String statusName;
+    private String status;
 
     public static ResponseStatus of(Status status) {
         var response = new ResponseStatus();

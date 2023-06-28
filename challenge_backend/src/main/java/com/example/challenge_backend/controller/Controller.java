@@ -29,15 +29,15 @@ public class Controller {
         return challengeService.saveUser(request);
     }
 
-    @PostMapping("subscriptionEvent")
-    public ResponseEvent saveEvent(@RequestBody RequestEvent requestEvent) {
-        return challengeService.saveEvent(requestEvent);
-    }
+//    @PostMapping("subscriptionEvent")
+//    public ResponseEvent saveEvent(@RequestBody RequestEvent requestEvent) {
+//        return challengeService.saveEvent(requestEvent);
+//    }
 
-    @PostMapping("subscriptionStatus")
-    public ResponseStatus saveStatus(@RequestBody RequestStatus requestStatus) {
-        return challengeService.saveStatus(requestStatus);
-    }
+//    @PostMapping("subscriptionStatus")
+//    public ResponseStatus saveStatus(@RequestBody RequestStatus requestStatus) {
+//        return challengeService.saveStatus(requestStatus);
+//    }
 
     @GetMapping("all_users")
     public List<ResponseUser> findAllUsers() {
@@ -62,5 +62,10 @@ public class Controller {
     @GetMapping("user/{id}")
     public ResponseUser findById(@PathVariable Integer id) {
         return challengeService.findByIdResponse(id);
+    }
+
+    @PutMapping("subscription/cancel/{id}")
+    public ResponseAll cancel(@RequestBody RequestAll requestAll, @PathVariable Integer id) {
+        return challengeService.cancelSubscription(requestAll, id);
     }
 }
