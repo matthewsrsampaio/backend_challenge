@@ -28,9 +28,9 @@ public class Status {
     @Column(name = "status_name")
     private String statusName;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "statusFk")
-    private Subscription subscription;
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "statusFk")
+//    private Subscription subscription;
 
     public static Status of(RequestStatus requestStatus) {
         var status = new Status();

@@ -1,12 +1,11 @@
 package com.example.challenge_backend.controller;
 
 import com.example.challenge_backend.request.Request;
+import com.example.challenge_backend.request.RequestAll;
 import com.example.challenge_backend.request.RequestEvent;
 import com.example.challenge_backend.request.RequestStatus;
-import com.example.challenge_backend.response.ResponseEvent;
+import com.example.challenge_backend.response.*;
 import com.example.challenge_backend.response.ResponseStatus;
-import com.example.challenge_backend.response.ResponseSubscription;
-import com.example.challenge_backend.response.ResponseUser;
 import com.example.challenge_backend.service.ChallengeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,21 +16,26 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api")
 public class Controller {
-//
+
     private final ChallengeService challengeService;
 
+    @PostMapping("subscriptionAll")
+    public ResponseAll saveAll(@RequestBody RequestAll request) {
+        return challengeService.saveAll(request);
+    }
+
     @PostMapping("subscriptionUser")
-    public ResponseUser save(@RequestBody Request request) {
+    public ResponseUser saveUser(@RequestBody Request request) {
         return challengeService.saveUser(request);
     }
 
     @PostMapping("subscriptionEvent")
-    public ResponseEvent save(@RequestBody RequestEvent requestEvent) {
+    public ResponseEvent saveEvent(@RequestBody RequestEvent requestEvent) {
         return challengeService.saveEvent(requestEvent);
     }
 
     @PostMapping("subscriptionStatus")
-    public ResponseStatus save(@RequestBody RequestStatus requestStatus) {
+    public ResponseStatus saveStatus(@RequestBody RequestStatus requestStatus) {
         return challengeService.saveStatus(requestStatus);
     }
 

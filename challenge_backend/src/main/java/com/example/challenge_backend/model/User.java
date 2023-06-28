@@ -33,9 +33,9 @@ public class User {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "userFk")
-    private Subscription subscription;
+//    @JsonIgnore
+//    @OneToOne(mappedBy = "userFk")
+//    private Subscription subscription;
 
     public static User of(Request request) {
         var user = new User();
