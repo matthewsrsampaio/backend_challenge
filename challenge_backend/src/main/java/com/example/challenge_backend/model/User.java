@@ -37,7 +37,6 @@ public class User {
         return user
                 .builder()
                 .name(requestAll.getName())
-                .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();
     }
 

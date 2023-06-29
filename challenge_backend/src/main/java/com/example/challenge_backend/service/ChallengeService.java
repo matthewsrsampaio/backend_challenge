@@ -110,8 +110,8 @@ public class ChallengeService {
         repositoryEvent.save(event);
 
         producer.produceMessageUser(user);
-        producer.produceMessageStatus(status);
         producer.produceMessageEvent(event);
+        producer.produceMessageStatus(status);
 
         return ResponseAll.of(user, status, event);
     }
@@ -144,8 +144,8 @@ public class ChallengeService {
         repositoryEvent.save(event);
 
         producer.produceMessageUser(user);
-        producer.produceMessageStatus(status);
         producer.produceMessageEvent(event);
+        producer.produceMessageStatus(status);
 
         return ResponseAll.of(user, status, event);
     }
@@ -178,8 +178,9 @@ public class ChallengeService {
         repositoryEvent.save(event);
 
        producer.produceMessageUser(user);
-        producer.produceMessageStatus(status);
         producer.produceMessageEvent(event);
+       producer.produceMessageStatus(status);
+
 
         return ResponseAll.of(user, status, event);
     }
