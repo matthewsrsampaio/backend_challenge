@@ -118,6 +118,7 @@ public class ChallengeService {
         User user = new User();
         user.setId(findById(id).getId());
         user.setName(findById(id).getName());
+        user.setCreatedAt(findById(id).getCreatedAt());
 
         Status status;
         status = Status.of(requestAll);
@@ -150,6 +151,7 @@ public class ChallengeService {
         User user = new User();
         user.setId(findById(id).getId());
         user.setName(findById(id).getName());
+        user.setCreatedAt(findById(id).getCreatedAt());
 
         Status status;
         status = Status.of(requestAll);
