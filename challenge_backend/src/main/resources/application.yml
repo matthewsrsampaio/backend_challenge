@@ -13,8 +13,8 @@ spring:
   #Configuracao do banco de dados
   datasource:
     driver-class-name: org.postgresql.Driver
-    #url: jdbc:postgresql://challenge-db:5432/challenge-db
-    url: jdbc:postgresql://localhost:5432/challenge-db
+    url: jdbc:postgresql://challenge-db:5432/challenge-db
+    #url: jdbc:postgresql://localhost:5432/challenge-db
     username: admin
     password: 123456
     initialize: true
