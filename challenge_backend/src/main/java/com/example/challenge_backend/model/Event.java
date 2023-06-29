@@ -42,7 +42,6 @@ public class Event {
         BeanUtils.copyProperties(requestAll, event);
         return event
                 .builder()
-//                .idEvent(requestAll.getId())
                 .type(requestAll.getType())
                 .build();
     }

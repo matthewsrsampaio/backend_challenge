@@ -19,11 +19,23 @@ public class RabbitConfig {
     @Value("${app-config.rabbit.exchange.subscription-api}")
     private String subscriptionTopicExchange;
 
-    @Value("${app-config.rabbit.routingKey.subscription-create}")
-    private String subscriptionRoutingKey;
+    @Value("${app-config.rabbit.routingKey.subscription-user}")
+    private String subscriptionRoutingKeyUser;
 
-    @Value("${app-config.rabbit.queue.subscription-create}")
-    private String subscriptionQueue;
+    @Value("${app-config.rabbit.queue.subscription-user}")
+    private String subscriptionQueueUser;
+
+    @Value("${app-config.rabbit.routingKey.subscription-status}")
+    private String subscriptionRoutingKeyStatus;
+
+    @Value("${app-config.rabbit.queue.subscription-status}")
+    private String subscriptionQueueStatus;
+
+    @Value("${app-config.rabbit.routingKey.subscription-event}")
+    private String subscriptionRoutingKeyEvent;
+
+    @Value("${app-config.rabbit.queue.subscription-event}")
+    private String subscriptionQueueEvent;
 
     @Bean
     public TopicExchange subscriptionTopicExchange() {
@@ -31,16 +43,42 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Queue subscriptionQueue() {
-        return new Queue(subscriptionQueue, true);
+    public Queue subscriptionQueueUser() {
+        return new Queue(subscriptionQueueUser, true);
     }
 
     @Bean
-    public Binding subscriptionTopicQueueBinding(TopicExchange topicExchange) {
+    public Queue subscriptionQueueStatus() {
+        return new Queue(subscriptionQueueStatus, true);
+    }
+
+    @Bean
+    public Queue subscriptionQueueEvent() {
+        return new Queue(subscriptionQueueEvent, true);
+    }
+
+    @Bean
+    public Binding subscriptionTopicQueueBindingUser(TopicExchange topicExchange) {
         return BindingBuilder
-                .bind(subscriptionQueue())
+                .bind(subscriptionQueueUser())
                 .to(topicExchange)
-                .with(subscriptionRoutingKey);
+                .with(subscriptionRoutingKeyUser);
+    }
+
+    @Bean
+    public Binding subscriptionTopicQueueBindingStatus(TopicExchange topicExchange) {
+        return BindingBuilder
+                .bind(subscriptionQueueStatus())
+                .to(topicExchange)
+                .with(subscriptionRoutingKeyStatus);
+    }
+
+    @Bean
+    public Binding subscriptionTopicQueueBindingEvent(TopicExchange topicExchange) {
+        return BindingBuilder
+                .bind(subscriptionQueueEvent())
+                .to(topicExchange)
+                .with(subscriptionRoutingKeyEvent);
     }
 
     @Bean

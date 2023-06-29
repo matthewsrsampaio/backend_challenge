@@ -12,8 +12,6 @@ import com.example.challenge_backend.repository.RepositoryUser;
 import com.example.challenge_backend.request.RequestAll;
 import com.example.challenge_backend.response.*;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -111,7 +109,7 @@ public class ChallengeService {
         event.setSubscriptionFk(Subscription);
         repositoryEvent.save(event);
 
-        producer.produceMessage(user);
+        producer.produceMessageUser(user);
 
         return ResponseAll.of(user, status, event);
     }
@@ -142,6 +140,9 @@ public class ChallengeService {
         event.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         repositoryEvent.save(event);
 
+        producer.produceMessageStatus(status);
+        producer.produceMessageEvent(event);
+
         return ResponseAll.of(user, status, event);
     }
 
@@ -170,6 +171,9 @@ public class ChallengeService {
         event.setSubscriptionFk(Subscription);
         event.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         repositoryEvent.save(event);
+
+        producer.produceMessageStatus(status);
+        producer.produceMessageEvent(event);
 
         return ResponseAll.of(user, status, event);
     }

@@ -29,7 +29,6 @@ public class Status {
         BeanUtils.copyProperties(requestAll, status);
         return status
                 .builder()
-//                .idStatus(requestAll.getId())
                 .status(requestAll.getStatus())
                 .build();
     }

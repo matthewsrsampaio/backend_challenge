@@ -36,7 +36,6 @@ public class User {
         BeanUtils.copyProperties(requestAll, user);
         return user
                 .builder()
-//                .idUser(requestAll.getId())
                 .name(requestAll.getName())
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();
