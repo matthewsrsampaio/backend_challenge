@@ -110,6 +110,8 @@ public class ChallengeService {
         repositoryEvent.save(event);
 
         producer.produceMessageUser(user);
+        producer.produceMessageStatus(status);
+        producer.produceMessageEvent(event);
 
         return ResponseAll.of(user, status, event);
     }
@@ -141,6 +143,7 @@ public class ChallengeService {
         event.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         repositoryEvent.save(event);
 
+        producer.produceMessageUser(user);
         producer.produceMessageStatus(status);
         producer.produceMessageEvent(event);
 
@@ -174,6 +177,7 @@ public class ChallengeService {
         event.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         repositoryEvent.save(event);
 
+       producer.produceMessageUser(user);
         producer.produceMessageStatus(status);
         producer.produceMessageEvent(event);
 
