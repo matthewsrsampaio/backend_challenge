@@ -1,5 +1,6 @@
 package com.example.challenge_backend.controller;
 
+import com.example.challenge_backend.model.Subscription;
 import com.example.challenge_backend.request.RequestAll;
 import com.example.challenge_backend.response.ResponseStatus;
 import com.example.challenge_backend.response.*;
@@ -46,7 +47,12 @@ public class Controller {
         return challengeService.findByIdResponse(id);
     }
 
-    @PostMapping("subscriptionAll")
+    @GetMapping("subscription/id/{id}")
+    public Subscription findBySubId(@PathVariable Integer id) {
+        return challengeService.findSubscriptionById(id);
+    }
+
+    @PostMapping("subscription/purchase")
     public ResponseAll saveAll(@RequestBody RequestAll request) {
         return challengeService.saveAll(request);
     }

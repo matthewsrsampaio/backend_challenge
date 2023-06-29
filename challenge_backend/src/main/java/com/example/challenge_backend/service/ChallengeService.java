@@ -78,8 +78,8 @@ public class ChallengeService {
         return ResponseUser.of(findById(id));
     }
 
-    public Event findEventById(Integer id) {
-        return repositoryEvent
+    public Subscription findSubscriptionById(Integer id) {
+        return repositorySubscription
                 .findById(id)
                 .orElseThrow();
     }
