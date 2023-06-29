@@ -4,6 +4,7 @@ import com.example.challenge_backend.model.Event;
 import com.example.challenge_backend.model.Status;
 import com.example.challenge_backend.model.Subscription;
 import com.example.challenge_backend.model.User;
+import com.example.challenge_backend.rabbitMQ.Producer;
 import com.example.challenge_backend.repository.RepositoryEvent;
 import com.example.challenge_backend.repository.RepositoryStatus;
 import com.example.challenge_backend.repository.RepositorySubscription;
@@ -11,6 +12,8 @@ import com.example.challenge_backend.repository.RepositoryUser;
 import com.example.challenge_backend.request.RequestAll;
 import com.example.challenge_backend.response.*;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -25,6 +28,7 @@ public class ChallengeService {
     private final RepositorySubscription repositorySubscription;
     private final RepositoryStatus repositoryStatus;
     private final RepositoryEvent repositoryEvent;
+    private final Producer producer;
 
     public List<ResponseUser> findAllUsers() {
         return repositoryUser
@@ -106,6 +110,8 @@ public class ChallengeService {
         event.setType("PURCHASE");
         event.setSubscriptionFk(Subscription);
         repositoryEvent.save(event);
+
+        producer.produceMessage(user);
 
         return ResponseAll.of(user, status, event);
     }
