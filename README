@@ -29,18 +29,32 @@ RUNNING
 
 REQUESTS
   - Check API status: http://localhost:8081/api/status
+
   - Check users: http://localhost:8081/api/all_users
+
   - Check subscriptions: http://localhost:8081/api/all_subscriptions
+
   - Check status: http://localhost:8081/api/all_status
+
   - Check evets: http://localhost:8081/api/all_events
-  - Check user by id: http://localhost:8081/api/user/{User ID} e.g. http://localhost:8081/api/user/1000
-  - Check user by name: http://localhost:8081/api/subscription/name/{User Name} e.g. http://localhost:8081/api/subscription/name/Matthews
-  - Check subscription by id: http://localhost:8081/api/subscription/id/{Subscription ID} e.g. http://localhost:8081/api/subscription/id/1000
+
+  - Check user by id: http://localhost:8081/api/user/{User ID} 
+    e.g. http://localhost:8081/api/user/1000
+
+  - Check user by name: http://localhost:8081/api/subscription/name/{User Name} 
+    e.g. http://localhost:8081/api/subscription/name/Matthews
+
+  - Check subscription by id: http://localhost:8081/api/subscription/id/{Subscription ID} 
+    e.g. http://localhost:8081/api/subscription/id/1000
+
   - Purchase a subscription: http://localhost:8081/api/subscription/purchase
             body: {
                       "name": "Paulo",
                       "status": "ACTIVATED",
                       "type": "PURCHASE"
                   }
-  - Cancel a subscription: http://localhost:8081/api/subscription/cancel/{id} e.g. http://localhost:8081/api/subscription/cancel/1000
-  - Restart a subscription: http://localhost:8081/api/subscription/restart/{id} e.g. http://localhost:8081/api/subscription/restart/1000
+  - Cancel a subscription: http://localhost:8081/api/subscription/cancel/{id} 
+    e.g. http://localhost:8081/api/subscription/cancel/1000
+
+  - Restart a subscription: http://localhost:8081/api/subscription/restart/{id} 
+    e.g. http://localhost:8081/api/subscription/restart/1000
