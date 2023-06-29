@@ -23,7 +23,7 @@ public class Event {
     @Id
     @Column(name = "id_event")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer idEvent;
+    private Integer id;
 
     @JsonIgnore
     @ManyToOne
@@ -42,7 +42,7 @@ public class Event {
         BeanUtils.copyProperties(requestAll, event);
         return event
                 .builder()
-                .idEvent(requestAll.getId())
+//                .idEvent(requestAll.getId())
                 .type(requestAll.getType())
                 .build();
     }

@@ -22,7 +22,7 @@ public class User {
     @Id
     @Column(name = "id_user")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer idUser;
+    private Integer id;
 
     @Column(name = "full_name")
     private String name;
@@ -36,6 +36,7 @@ public class User {
         BeanUtils.copyProperties(requestAll, user);
         return user
                 .builder()
+//                .idUser(requestAll.getId())
                 .name(requestAll.getName())
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .build();

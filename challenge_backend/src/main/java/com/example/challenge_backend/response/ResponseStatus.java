@@ -12,8 +12,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseStatus implements Serializable {
-    private Integer idStatus;
-    private String status;
+    private Integer id;
+    private String statusName;
 
     public static ResponseStatus of(Status status) {
         var response = new ResponseStatus();

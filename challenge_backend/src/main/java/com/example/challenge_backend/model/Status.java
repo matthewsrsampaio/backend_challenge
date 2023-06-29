@@ -19,7 +19,7 @@ public class Status {
     @Id
     @Column(name = "id_status")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer idStatus;
+    private Integer id;
 
     @Column(name = "status_name")
     private String status;
@@ -29,7 +29,7 @@ public class Status {
         BeanUtils.copyProperties(requestAll, status);
         return status
                 .builder()
-                .idStatus(requestAll.getId())
+//                .idStatus(requestAll.getId())
                 .status(requestAll.getStatus())
                 .build();
     }

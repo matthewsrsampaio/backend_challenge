@@ -25,12 +25,6 @@ public class RabbitConfig {
     @Value("${app-config.rabbit.queue.subscription-update}")
     private String subscriptionQueue;
 
-    @Value("${app-config.rabbit.routingKey.consumer-update}")
-    private String consumerRoutingKey;
-
-    @Value("${app-config.rabbit.queue.consumer-update}")
-    private String consumerQueue;
-
     @Bean
     public TopicExchange subscriptionTopicExchange() {
         return new TopicExchange(subscriptionTopicExchange);
@@ -42,24 +36,11 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Queue consumerQueue() {
-        return new Queue(consumerQueue, true);
-    }
-
-    @Bean
     public Binding subscriptionTopicQueueBinding(TopicExchange topicExchange) {
         return BindingBuilder
                 .bind(subscriptionQueue())
                 .to(topicExchange)
                 .with(subscriptionRoutingKey);
-    }
-
-    @Bean
-    public Binding consumerTopicQueueBinding(TopicExchange topicExchange) {
-        return BindingBuilder
-                .bind(consumerQueue())
-                .to(topicExchange)
-                .with(consumerRoutingKey);
     }
 
     @Bean
