@@ -15,10 +15,10 @@ public class Consumer {
 
     private final ObjectMapper objectMapper;
 
-    @RabbitListener(queues = "${app-config.rabbit.queue.subscription-update}")
-    public void receiveSubscriptionMessage(ResponseUser subDTO) throws JsonProcessingException {
-        this.objectMapper.writeValueAsString(subDTO);
-        log.info("Message received: {}", this.objectMapper.writeValueAsString(subDTO));
+    @RabbitListener(queues = "${app-config.rabbit.queue.subscription-create}")
+    public void receiveSubscriptionMessage(ResponseUser message) throws JsonProcessingException {
+        this.objectMapper.writeValueAsString(message);
+        log.info("Message received: {}", this.objectMapper.writeValueAsString(message));
     }
 
 }

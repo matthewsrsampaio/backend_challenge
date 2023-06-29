@@ -47,8 +47,12 @@ app-config:
       subscription-api: subscription.topic
 
     routingKey:
-      subscription-update: subscription-update.routingKey
+      subscription-create: subscription-create.routingKey
+      subscription-cancel: subscription-cancel.routingKey
+      subscription-restart: subscription-restart.routingKey
 
     queue:
-      subscription-update: subscription-update.queue
+      subscription-create: subscription-create.queue
+      subscription-cancel: subscription-cancel.queue
+      subscription-restart: subscription-restart.queue
 

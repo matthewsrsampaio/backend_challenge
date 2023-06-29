@@ -131,6 +131,7 @@ public class ChallengeService {
         subscription.setIdSubscription(id);
         subscription.setStatusFk(status);
         subscription.setUserFk(user);
+        subscription.setCreatedAt(findById(id).getCreatedAt());
         subscription.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         var Subscription = repositorySubscription.save(subscription);
 
@@ -159,6 +160,7 @@ public class ChallengeService {
         subscription.setIdSubscription(id);
         subscription.setStatusFk(status);
         subscription.setUserFk(user);
+        subscription.setCreatedAt(findById(id).getCreatedAt());
         subscription.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         var Subscription = repositorySubscription.save(subscription);
 

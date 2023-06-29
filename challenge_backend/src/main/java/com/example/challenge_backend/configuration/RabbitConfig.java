@@ -19,10 +19,10 @@ public class RabbitConfig {
     @Value("${app-config.rabbit.exchange.subscription-api}")
     private String subscriptionTopicExchange;
 
-    @Value("${app-config.rabbit.routingKey.subscription-update}")
+    @Value("${app-config.rabbit.routingKey.subscription-create}")
     private String subscriptionRoutingKey;
 
-    @Value("${app-config.rabbit.queue.subscription-update}")
+    @Value("${app-config.rabbit.queue.subscription-create}")
     private String subscriptionQueue;
 
     @Bean

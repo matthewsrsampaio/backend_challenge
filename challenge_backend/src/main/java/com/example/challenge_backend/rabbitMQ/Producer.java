@@ -18,7 +18,7 @@ public class Producer {
     @Value("${app-config.rabbit.exchange.subscription-api}")
     private String subscriptionTopicExchange;
 
-    @Value("${app-config.rabbit.routingKey.subscription-update}")
+    @Value("${app-config.rabbit.routingKey.subscription-create}")
     private String subscriptionRoutingKey;
 
     private final ObjectMapper objectMapper;
