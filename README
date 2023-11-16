@@ -17,7 +17,6 @@ If you need password and some information about RabbitMQ, Postgres and API, visi
 
 RUNNING
   - At first, do get into the main directory where docker-compose file is located and run the following command:
-     --ps: Remember to remove <> from the commando above.
             
             docker compose up --build
 
