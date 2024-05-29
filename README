@@ -1,32 +1,33 @@
-Hello everyone, my name is Matthews and I am a ASD(Analysis and Systems Development) student. 
-This is the Backend Challenge of Instituto Atlântico.
-
-First of all you need:
+###This is the Backend Challenge from Instituto Atlântico.
+##
+###First of all you need:
   - Java 17
   - Docker
   - Postman(or anything else you wish to send requests)
-  - DBeaver(or anything else you wish to manipulate DB)
-  - The DB used in this project is Postgres 11
+  - IDE of your preference
 
 Images you need to pull from Docker <  https://hub.docker.com/  >
-  - RabbitMQ
-  - Postgres
+    *ps: You need to be logged in Docker in order to be allowed to download the images od RabbitMQ and Postgres.
+    **ps: Docker needs to be in Linux version.
+    ***ps: The installation will take place when you run: "docker compose up --build" however it's not time to run it yet.
 
-If you need password and some information about RabbitMQ, Postgres and API, visit an file named:
+If you need password and some information about RabbitMQ, Postgres and API, visit a file named:
   <  application.yml  >
 
-RUNNING
+###RUNNING
+##
   - At first, do get into the main directory where docker-compose file is located and run the following command:
             
             docker compose up --build
 
-       ---What happened? The command you have just inserted into the terminal will build Postgres, RabbitMQ and our API on Docker.
+       ---What happened? The command you have just inserted into the terminal will build Postgres11, RabbitMQ13.3 and our API on Docker.
 
   - If you want to run it again and the project is already built, run:
 
             docker compose up
 
-REQUESTS
+###REQUESTS
+##
   - Check API status: http://localhost:8081/api/status
 
   - Check users: http://localhost:8081/api/all_users

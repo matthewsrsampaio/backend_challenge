@@ -1,7 +1,7 @@
 Comandos Docker:
 
 Container Product-DB:
-docker run --name subscription-db -p 5433:5432 -e POSTGRES_DB=subscription-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=123456 postgres:11
+{docker run --name subscription-db -p 5433:5432 -e POSTGRES_DB=subscription-db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=123456 postgres:11}
 
 Container RabbitMQ:
 docker run --name subscription_rabbit -p 5672:5672 -p 25676:25676 -p 15672:15672 rabbitmq:3-management

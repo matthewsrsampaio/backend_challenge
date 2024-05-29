@@ -1,8 +1,9 @@
-version: "3"
+version: "3.4"
 services:
 
   challenge-db:
     image: postgres:11
+
     container_name: challenge-db
     restart: always
     networks:
@@ -15,7 +16,7 @@ services:
       - 5432:5432
 
   challenge_rabbit:
-    image: rabbitmq:3-management
+    image: rabbitmq:3.13-management
     container_name: challenge_rabbit
     hostname: challenge_rabbit
     networks:
