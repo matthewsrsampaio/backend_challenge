@@ -1,6 +1,6 @@
-###This is the Backend Challenge from Instituto Atlântico.
+### This is the Backend Challenge from Instituto Atlântico.
 ##
-###First of all you need:
+### First of all you need:
   - Java 17
   - Docker
   - Postman(or anything else you wish to send requests)
@@ -14,7 +14,7 @@ Images you need to pull from Docker <  https://hub.docker.com/  >
 If you need password and some information about RabbitMQ, Postgres and API, visit a file named:
   <  application.yml  >
 
-###RUNNING
+### RUNNING
 ##
   - At first, do get into the main directory where docker-compose file is located and run the following command:
             
@@ -26,7 +26,7 @@ If you need password and some information about RabbitMQ, Postgres and API, visi
 
             docker compose up
 
-###REQUESTS
+### REQUESTS
 ##
   - Check API status: http://localhost:8081/api/status
 
