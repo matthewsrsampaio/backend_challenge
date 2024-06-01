@@ -9,12 +9,12 @@
 >[!WARNING]
 >Pay attention to the instructions below.
 ### Images you need to pull from DockerHub.
-  - ps1: *You need to be `logged in Docker` in order to be allowed to download the images of RabbitMQ and Postgres11.*
-  - ps2: *Docker needs to be in `Linux version`.*
-  - ps3: *The pull and installation will take place when you run:* `docker compose up --build` *however it's not time to run it yet.*
+  - *You need to be `logged in Docker` in order to be allowed to download the images of RabbitMQ and Postgres11.*
+  - *Docker needs to be in `Linux version`.*
+  - *The pull and installation will take place once you run:* `docker compose up --build` *however it's not the time to run it yet.*
 
 >[!NOTE]
->If you need password and some information about RabbitMQ, Postgres and API, visit a file named:*
+>If you need password and some information about RabbitMQ, Postgres and API, visit a file named:
   `application.yml`
 
 ### RUNNING
