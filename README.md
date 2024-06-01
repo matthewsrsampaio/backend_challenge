@@ -6,14 +6,15 @@
   - Postman(or anything else you wish to send requests and get responses)
   - IDE of your preference
 
->[!IMPORTANT]
+>[!WARNING]
 >Pay attention to the instructions below.
 ### Images you need to pull from DockerHub.
   - ps1: *You need to be `logged in Docker` in order to be allowed to download the images of RabbitMQ and Postgres11.*
   - ps2: *Docker needs to be in `Linux version`.*
   - ps3: *The pull and installation will take place when you run:* `docker compose up --build` *however it's not time to run it yet.*
 
-*If you need password and some information about RabbitMQ, Postgres and API, visit a file named:*
+>[!NOTE]
+>If you need password and some information about RabbitMQ, Postgres and API, visit a file named:*
   `application.yml`
 
 ### RUNNING
@@ -21,8 +22,8 @@
   - At first, do get into the main directory where docker-compose file is located and run the following command:
             
             docker compose up --build
-
-       ---What happened? The command you have just inserted into the terminal will build Postgres11, RabbitMQ and our API on Docker.
+>[!NOTE]
+>What happened??? The command you have just inserted into the terminal will build Postgres11, RabbitMQ and our API on Docker.
 
   - If you want to run it again and the project is already built, run:
 
